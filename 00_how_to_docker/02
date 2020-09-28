@@ -1,0 +1,1 @@
+docker-machine inspect -f "{{ .Driver.IPAddress }}" Char
