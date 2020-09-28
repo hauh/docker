@@ -1,0 +1,1 @@
+docker run -p 8081:80 --name roach-warden --network nydus -e PMA_HOST=spawning-pool -d phpmyadmin
