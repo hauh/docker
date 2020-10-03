@@ -1,0 +1,1 @@
+docker-machine ssh Char docker service create --name engineering-bay --network overmind --replicas 2 -e OC_USERNAME=smorty -e OC_PASSWD=smorty_pass 42school/engineering-bay

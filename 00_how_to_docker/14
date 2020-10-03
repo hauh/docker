@@ -1,1 +1,4 @@
-docker run -p 8080:80 --name lair -d wordpress && docker network create nydus && docker network connect nydus lair && docker network connect nydus spawning-pool
+docker run -p 8080:80 --name lair -d wordpress &&
+docker network create nydus &&
+docker network connect nydus lair &&
+docker network connect nydus spawning-pool
