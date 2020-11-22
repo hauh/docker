@@ -1,10 +1,6 @@
-FROM ubuntu
-
-RUN apt-get -y update && apt-get -y upgrade && \
-    apt-get -y install build-essential
-
-COPY source /opt/app/
+FROM gcc
 WORKDIR /opt/app
-
+COPY Makefile .
+COPY source ./source
 RUN make
-ENTRYPOINT ./app
+CMD ./app
