@@ -1,18 +1,32 @@
-version: "3"
+version: '3.7'
 
 services:
-  db:
-    image: postgres
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-  web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/code
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
+   db:
+     image: mysql
+     restart: always
+     volumes:
+       - wordpress_db_data
+     environment:
+       MYSQL_ROOT_PASSWORD: super_secure_password
+       MYSQL_DATABASE: docker_wordpress_db
+       MYSQL_USER: docker_user
+       MYSQL_PASSWORD: secure_password
+
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress
+     volumes:
+       - ./site_data:/var/www/html/
+     ports:
+       - 80:80
+       - 443:443
+     restart: always
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_USER: docker_user
+       WORDPRESS_DB_PASSWORD: secure_password
+       WORDPRESS_DB_NAME: docker_wordpress_db
+
+volumes:
+  db_data: {}
